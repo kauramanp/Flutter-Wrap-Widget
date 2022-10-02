@@ -63,36 +63,48 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.red),
-                    onPressed: () {
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                  onPressed: () {
+                    setState(() {
                       color = 1;
-                    },
-                    child: Container()),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    onPressed: () {
+                    });
+                  },
+                  child: Container()),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  onPressed: () {
+                    setState(() {
                       color = 2;
-                    },
-                    child: Container()),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.yellow),
-                    onPressed: () {
+                    });
+                  },
+                  child: Container()),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                  onPressed: () {
+                    setState(() {
                       color = 3;
-                    },
-                    child: Container())
-              ],
+                    });
+                  },
+                  child: Container())
+            ],
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 8,
+                  runSpacing: 12,
+                  children: getWidgets()),
             ),
-            Wrap(children: getWidgets())
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
@@ -103,8 +115,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> getWidgets() {
-    var list = List<Widget>();
-    for (int i = 0; i < _counter; i++) {}
+    List<Widget> list = [];
+    for (int i = 0; i < _counter; i++) {
+      list.add(Container(
+          margin: const EdgeInsets.all(4),
+          height: 100,
+          width: 100,
+          color: color == 1
+              ? Colors.red
+              : color == 2
+                  ? Colors.green
+                  : Colors.yellow));
+    }
 
     return list;
   }
